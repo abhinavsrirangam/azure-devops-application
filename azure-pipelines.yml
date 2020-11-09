@@ -1,5 +1,5 @@
-# variables:
-#   buildConfiguration: 'Release'
+variables:
+- group: SampleVariable
 jobs:
 - job: Angular
   steps:
