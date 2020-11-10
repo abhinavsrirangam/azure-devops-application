@@ -67,6 +67,16 @@ jobs:
       command: custom
       customCommand: run lint --  --format=stylish
       workingDir: src/angular7
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/dist'
+      Contents: '**/*'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
   
   # - task: Npm@1
   #   displayName: 'E2E Test Angular'
@@ -100,5 +110,5 @@ jobs:
       azureSubscription: 'AzureConnection'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(System.DefaultWorkingDirectory)/dist'
+      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/dist'
 
