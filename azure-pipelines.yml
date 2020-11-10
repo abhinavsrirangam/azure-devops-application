@@ -82,7 +82,7 @@ jobs:
       buildType: 'current'
       downloadType: 'single'
       downloadPath: '$(Build.ArtifactStagingDirectory)/drop'
-      artifactName: 'test'
+      artifactName: 'drop'
   
   # - task: Npm@1
   #   displayName: 'E2E Test Angular'
@@ -117,5 +117,5 @@ jobs:
       azureSubscription: 'AzureConnection'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop/test
+      inlineScript: az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop
 
