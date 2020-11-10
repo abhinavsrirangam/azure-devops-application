@@ -83,12 +83,12 @@ jobs:
       ArtifactName: 'drop'
       publishLocation: 'Container'
       
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      downloadPath: '$(Build.ArtifactStagingDirectory)/drop'
-      artifactName: 'drop'
+  # - task: DownloadBuildArtifacts@0
+  #   inputs:
+  #     buildType: 'current'
+  #     downloadType: 'single'
+  #     downloadPath: '$(Build.ArtifactStagingDirectory)/drop'
+  #     artifactName: 'drop'
   
   # - task: Npm@1
   #   displayName: 'E2E Test Angular'
