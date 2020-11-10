@@ -77,13 +77,13 @@ jobs:
       SourceFolder: '$(Build.SourcesDirectory)/src/angular7/dist'
       Contents: '**/*'
       TargetFolder: '$(Build.ArtifactStagingDirectory)/dist'
-  - task: ShellScript@2
-    inputs:
-      scriptPath:
-      args: 'll' # Optional
-      #disableAutoCwd: false # Optional
-      #cwd: '' # Optional
-      #failOnStandardError: false
+  # - task: ShellScript@2
+  #   inputs:
+  #     scriptPath:
+  #     args: 'll' # Optional
+  #     #disableAutoCwd: false # Optional
+  #     #cwd: '' # Optional
+  #     #failOnStandardError: false
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist'
