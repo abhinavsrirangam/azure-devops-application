@@ -86,7 +86,7 @@ jobs:
   - task: AzureCLI@2
     displayName: 'Azure CLI'
     inputs:
-      azureSubscription: 'GTS-Cloud'
+      azureSubscription: 'GTS - Cloud'
       scriptType: ps
       scriptLocation: inlineScript
       inlineScript: |
