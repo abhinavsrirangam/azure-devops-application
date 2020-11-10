@@ -67,16 +67,16 @@ jobs:
       command: custom
       customCommand: run lint --  --format=stylish
       workingDir: src/angular7
-  # - task: CopyFiles@2
-  #   inputs:
-  #     SourceFolder: 'src/angular7/dist'
-  #     Contents: '**/*'
-  #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/dist'
+      SourceFolder: 'src/angular7/dist'
       Contents: '**/*'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  # - task: CopyFiles@2
+  #   inputs:
+  #     SourceFolder: '$(Build.SourcesDirectory)/dist'
+  #     Contents: '**/*'
+  #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
