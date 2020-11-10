@@ -82,13 +82,20 @@ jobs:
   #     searchFolder: $(System.DefaultWorkingDirectory)/src/angular7/e2e/junit
   #     testRunTitle: Angular_E2E
   #     testResultsFormat: JUnit
-  #     testResultsFiles: "**/junit*.xml"
-  - task: AzureCLI@2
-    displayName: 'Azure CLI'
-    inputs:
-      azureSubscription: 'GTS - Cloud'
-      scriptType: ps
-      scriptLocation: inlineScript
-      inlineScript: |
-      az storage blob upload-batch --account-name $(DevStrgName)$ --account-key $(DevStrgKey) --destination '$web' --source ./src/angular7/dist
-#      az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
+#   #     testResultsFiles: "**/junit*.xml"
+#   - task: AzureCLI@2
+#     displayName: 'Azure CLI'
+#     inputs:
+#       azureSubscription: 'GTS - Cloud'
+#       scriptType: ps
+#       scriptLocation: inlineScript
+#       inlineScript: |
+#       az storage blob upload-batch --account-name $(DevStrgName)$ --account-key $(DevStrgKey) --destination '$web' --source ./src/angular7/dist
+# #      az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'AzureConnection'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName)$ --account-key $(DevStrgKey) --destination ''$web'' --source ./src/angular7/dist'
+
