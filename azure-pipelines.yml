@@ -3,7 +3,7 @@ variables:
 # trigger:
 # - master
 pool:
-   vmImage: 'windows-2019'
+   vmImage: 'windows-2019'      
 jobs:
 - job: Angular
   steps:
@@ -108,13 +108,13 @@ jobs:
 #       inlineScript: |
 #       az storage blob upload-batch --account-name $(DevStrgName)$ --account-key $(DevStrgKey) --destination '$web' --source ./src/angular7/dist
 # #      az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
-- job: Release
-  steps:
-  - task: AzureCLI@2
-    displayName: 'Azure CLI'
-    inputs:
-      azureSubscription: 'AzureConnection'
-      scriptType: 'ps'
-      scriptLocation: 'inlineScript'
-      inlineScript: az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source ./abhinavsrirangam/azure-devops-application/drop
+# - job: Release
+#   steps:
+#   - task: AzureCLI@2
+#     displayName: 'Azure CLI'
+#     inputs:
+#       azureSubscription: 'AzureConnection'
+#       scriptType: 'ps'
+#       scriptLocation: 'inlineScript'
+#       inlineScript: az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source ./abhinavsrirangam/azure-devops-application/drop
 
