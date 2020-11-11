@@ -89,6 +89,13 @@ jobs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist'
       ArtifactName: 'drop'
       publishLocation: 'Container'
+  - task: AzureFileCopy@4
+    inputs:
+      SourcePath: '$(Build.ArtifactStagingDirectory)/dist'
+      azureSubscription: 'AzureConnection'
+      Destination: 'AzureBlob'
+      storage: 'e2nprdhub01sample'
+      ContainerName: 'web'
       
   # - task: DownloadBuildArtifacts@0
   #   inputs:
@@ -121,15 +128,15 @@ jobs:
 #       inlineScript: |
 #       az storage blob upload-batch --account-name $(DevStrgName)$ --account-key $(DevStrgKey) --destination '$web' --source ./src/angular7/dist
 # #      az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
-- job: Release
-  dependsOn: 'Angular'
-  steps:
-  - task: AzureCLI@2
-    displayName: 'Azure CLI'
-    inputs:
-      azureSubscription: 'AzureConnection'
-      scriptType: 'ps'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source $(Build.ArtifactStagingDirectory)/drop' 
+# - job: Release
+#   dependsOn: 'Angular'
+#   steps:
+#   - task: AzureCLI@2
+#     displayName: 'Azure CLI'
+#     inputs:
+#       azureSubscription: 'AzureConnection'
+#       scriptType: 'ps'
+#       scriptLocation: 'inlineScript'
+#       inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source $(Build.ArtifactStagingDirectory)/drop' 
       
 
