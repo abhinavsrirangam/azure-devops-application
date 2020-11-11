@@ -137,4 +137,4 @@ jobs:
       azureSubscription: 'AzureConnection'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: "az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source ."
+      inlineScript: "az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source ./drop/angular7"
