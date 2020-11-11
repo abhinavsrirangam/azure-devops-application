@@ -88,7 +88,8 @@ jobs:
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
-      publishLocation: 'Container'
+      publishLocation: 'Container'   
+
   # - task: AzureFileCopy@4
   #   inputs:
   #     SourcePath: '$(Build.ArtifactStagingDirectory)/drop'
@@ -123,10 +124,17 @@ jobs:
 - job: Release
   dependsOn: 'Angular'
   steps:
-  - task: AzureCLI@2
-    displayName: 'Azure CLI'
-    inputs:
-      azureSubscription: 'AzureConnection'
-      scriptType: 'ps'
-      scriptLocation: 'inlineScript'
-      inlineScript: "az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop"
+  #Your build pipeline references an undefined variable named ‘DevStrgName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘DevStrgKey’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Azure CLI '
+  inputs:
+    azureSubscription: 'app_DigitalHubNPRD'
+    scriptType: ps
+    scriptLocation: inlineScript
+    inlineScript: |
+     az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop/DigitalHubFrontend/DigitalHub/
+     
+     az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
