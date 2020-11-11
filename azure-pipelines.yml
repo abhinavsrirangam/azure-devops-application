@@ -12,7 +12,6 @@ jobs:
     inputs:
       SourceFolder: src/angular7/junit
       Contents: 'TEST*.xml'
-  
   - task: Npm@1
     displayName: 'npm install'
     inputs:
@@ -77,64 +76,20 @@ jobs:
       SourceFolder: '$(Build.SourcesDirectory)/src/angular7/dist'
       Contents: '**/*'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  # - task: ShellScript@2
-  #   inputs:
-  #     scriptPath:
-  #     args: 'll' # Optional
-  #     #disableAutoCwd: false # Optional
-  #     #cwd: '' # Optional
-  #     #failOnStandardError: false
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
-      publishLocation: 'Container'   
+      publishLocation: 'Container'
 
-  # - task: AzureFileCopy@4
-  #   inputs:
-  #     SourcePath: '$(Build.ArtifactStagingDirectory)/drop'
-  #     azureSubscription: 'AzureConnection'
-  #     Destination: 'AzureBlob'
-  #     storage: 'e2nprdhub01sample'
-  #     ContainerName: '$web'      
-  # - task: Npm@1
-  #   displayName: 'E2E Test Angular'
-  #   inputs:
-  #     command: custom
-  #     customCommand: run e2e
-  #     workingDir: src/angular7
-  
-  # - task: PublishTestResults@2
-  #   displayName: 'Publish Angular E2E test results'
-  #   condition: succeededOrFailed()
-  #   inputs:
-  #     searchFolder: $(System.DefaultWorkingDirectory)/src/angular7/e2e/junit
-  #     testRunTitle: Angular_E2E
-  #     testResultsFormat: JUnit
-#   #     testResultsFiles: "**/junit*.xml"
-#   - task: AzureCLI@2
-#     displayName: 'Azure CLI'
-#     inputs:
-#       azureSubscription: 'GTS - Cloud'
-#       scriptType: ps
-#       scriptLocation: inlineScript
-#       inlineScript: |
-#       az storage blob upload-batch --account-name $(DevStrgName)$ --account-key $(DevStrgKey) --destination '$web' --source ./src/angular7/dist
-# #      az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
 - job: Release
   dependsOn: 'Angular'
   steps:
-  #Your build pipeline references an undefined variable named ‘DevStrgName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘DevStrgKey’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-
-steps:
-- task: AzureCLI@2
-  displayName: 'Azure CLI '
-  inputs:
-    azureSubscription: 'app_DigitalHubNPRD'
-    scriptType: ps
-    scriptLocation: inlineScript
-    inlineScript: |
-     az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop/DigitalHubFrontend/DigitalHub/
-     
-     az cdn endpoint purge -g rg_NPRD-DHUB -n e2nprdhubapp --profile-name e2nprdhubcdn01 --content-paths '/*'
+  - task: AzureCLI@2
+    displayName: 'Azure CLI '
+    inputs:
+      azureSubscription: 'AzureConnection'
+      scriptType: ps
+      scriptLocation: inlineScript
+      inlineScript: |
+      az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop/
