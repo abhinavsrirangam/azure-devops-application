@@ -95,7 +95,7 @@ jobs:
       azureSubscription: 'AzureConnection'
       Destination: 'AzureBlob'
       storage: 'e2nprdhub01sample'
-      ContainerName: 'web'
+      ContainerName: '$(web)'
       
   # - task: DownloadBuildArtifacts@0
   #   inputs:
