@@ -76,7 +76,7 @@ jobs:
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/src/angular7/dist'
       Contents: '**/*'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/dist'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
   # - task: ShellScript@2
   #   inputs:
   #     scriptPath:
@@ -95,7 +95,7 @@ jobs:
       azureSubscription: 'AzureConnection'
       Destination: 'AzureBlob'
       storage: 'e2nprdhub01sample'
-      ContainerName: '$(web)'
+      ContainerName: 'web'
       
   # - task: DownloadBuildArtifacts@0
   #   inputs:
