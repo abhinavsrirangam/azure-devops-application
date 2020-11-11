@@ -95,15 +95,7 @@ jobs:
   #     azureSubscription: 'AzureConnection'
   #     Destination: 'AzureBlob'
   #     storage: 'e2nprdhub01sample'
-  #     ContainerName: '$web'
-      
-  # - task: DownloadBuildArtifacts@0
-  #   inputs:
-  #     buildType: 'current'
-  #     downloadType: 'single'
-  #     downloadPath: '$(Build.ArtifactStagingDirectory)/drop'
-  #     artifactName: 'drop'
-  
+  #     ContainerName: '$web'      
   # - task: Npm@1
   #   displayName: 'E2E Test Angular'
   #   inputs:
@@ -137,4 +129,4 @@ jobs:
       azureSubscription: 'AzureConnection'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: "az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source ./$(Build.ArtifactStagingDirectory)/drop"
+      inlineScript: "az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source $(Build.ArtifactStagingDirectory)/drop"
