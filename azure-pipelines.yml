@@ -86,12 +86,12 @@ jobs:
   #     #failOnStandardError: false
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
   - task: AzureFileCopy@4
     inputs:
-      SourcePath: '$(Build.ArtifactStagingDirectory)/dist/drop'
+      SourcePath: '$(Build.ArtifactStagingDirectory)/drop'
       azureSubscription: 'AzureConnection'
       Destination: 'AzureBlob'
       storage: 'e2nprdhub01sample'
