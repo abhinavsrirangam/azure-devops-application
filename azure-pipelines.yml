@@ -95,7 +95,7 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        cd $(Build.ArtiactStagingDirectory)
+        cd $(Build.ArtiactStagingDirectory)/drop
         
         dir
   - task: AzureCLI@2
