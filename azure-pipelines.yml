@@ -92,7 +92,7 @@ jobs:
 - job: Release
   dependsOn: 'Angular'
   steps:
-  - script: pwd && dir
+  - script: cd $(System.ArtifactsDirectory)/drop && pwd && dir
     displayName: 'Run a one-line script'
   - task: AzureCLI@2
     displayName: 'Azure CLI '
