@@ -89,17 +89,10 @@ jobs:
       artifactName: 'drop'
       itemPattern: '**/*'
       downloadPath: '$(System.ArtifactsDirectory)'
-- job: Release
-  dependsOn: 'Angular'
-  steps:
-  # - script: cd '$(System.ArtifactsDirectory)/drop'
-  #   displayName: 'Run a one-line script'
-  - script: dir
-    displayName: 'Run a one-line script'  
   - task: AzureCLI@2
     displayName: 'Azure CLI '
     inputs:
       azureSubscription: 'AzureConnection'
       scriptType: ps
       scriptLocation: inlineScript
-      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source .'
+      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source ./drop/angular7'
