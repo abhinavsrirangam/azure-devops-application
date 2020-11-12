@@ -88,7 +88,6 @@ stages:
 - stage: Release
   jobs:
   - job: DeploytoDev
-    dependsOn: 'Angular'
     steps: 
     - task: DownloadBuildArtifacts@0
       inputs:
