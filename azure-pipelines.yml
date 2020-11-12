@@ -98,4 +98,4 @@ jobs:
       azureSubscription: AzureConnection
       scriptType: ps
       scriptLocation: inlineScript
-      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source ./abhinavsrirangam.azure-devops-application/drop'
+      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source ./abhinavsrirangam.azure-devops-application/$(System.ArtifactsDirectory)/drop'
