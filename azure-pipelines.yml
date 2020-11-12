@@ -82,17 +82,20 @@ jobs:
       ArtifactName: 'drop'
       publishLocation: 'Container'
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'drop'
-      itemPattern: '**/*'
-      downloadPath: '$(System.ArtifactsDirectory)'
+  # - task: DownloadBuildArtifacts@0
+  #   inputs:
+  #     buildType: 'current'
+  #     downloadType: 'single'
+  #     artifactName: 'drop'
+  #     itemPattern: '**/*'
+  #     downloadPath: '$(System.ArtifactsDirectory)'
+- job: Release
+  dependsOn: 'Angular'
+  steps: 
   - task: AzureCLI@2
     displayName: 'Azure CLI '
     inputs:
       azureSubscription: 'AzureConnection'
       scriptType: ps
       scriptLocation: inlineScript
-      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source ./drop/angular7'
+      inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source $(Build.ArtifactStagingDirectory)/drop/angular7'    
