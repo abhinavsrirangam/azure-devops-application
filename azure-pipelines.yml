@@ -92,6 +92,8 @@ jobs:
 - job: Release
   dependsOn: 'Angular'
   steps:
+  - script: pwd && dir
+    displayName: 'Run a one-line script'
   - task: AzureCLI@2
     displayName: 'Azure CLI '
     inputs:
