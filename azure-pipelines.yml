@@ -92,6 +92,12 @@ jobs:
 - job: Release
   dependsOn: 'Angular'
   steps: 
+  - task: CmdLine@2
+    inputs:
+      script: |
+        cd $(Build.ArtiactStagingDirectory)
+        
+        dir
   - task: AzureCLI@2
     displayName: 'Azure CLI '
     inputs:
