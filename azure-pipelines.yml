@@ -92,7 +92,7 @@ jobs:
 - job: Release
   dependsOn: 'Angular'
   steps:
-  - script: cd $(System.ArtifactsDirectory)/drop 
+  - script: cd '$(System.ArtifactsDirectory)/drop'
     displayName: 'Run a one-line script'
   - script: dir
     displayName: 'Run a one-line script'  
