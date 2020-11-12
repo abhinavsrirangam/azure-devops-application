@@ -95,7 +95,7 @@ jobs:
   - task: AzureCLI@2
     displayName: 'Azure CLI '
     inputs:
-      azureSubscription: 'AzureConnection'
-      scriptType: ps
-      scriptLocation: inlineScript
-      inlineScript: "az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination '$web' --source ./abhinavsrirangam.azure-devops-application/$(System.ArtifactsDirectory)/drop"
+    azureSubscription: AzureConnection
+    scriptType: ps
+    scriptLocation: inlineScript
+    inlineScript: 'az storage blob upload-batch --account-name $(DevStrgName) --account-key $(DevStrgKey) --destination ''$web'' --source ./abhinavsrirangam.azure-devops-application/drop/angular7'
